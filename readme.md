@@ -1,7 +1,20 @@
 # VTEX - Cartão Presente
 
 Cria um cupom único na VTEX quando o pedido é faturado.
+
 A partir de uma promoção já existente, esse cupom é associado e fica disponível para uso.
+
+Para que o cupom seja criado numa promoção especifica, o produto do cartão presente precisa ter a especificação "promotionId" preenchida com o ID da promoção que o cupom será associado.
+
+## Pré configurações
+
+1. No cadastro do produto é necessário criar 2 especificações:
+
+    * GiftCard (checkbox): Precisa ter o valor "Sim" de forma opcional. Se marcado, participará do app para gerar o cupom.
+
+    * promotionId (text): ID da promoção que irá receber o cupom para dar o desconto na próxima compra.
+
+2. Configurar o arquivo .env na raiz desse app.
 
 ## Opções de job
 
@@ -35,7 +48,7 @@ Executa, independente do status do pedido o registro do cupom na promoção resp
 
 * orderId = Código do pedido na VTEX. Campo obrigatório.
 
-## Configurações de conexão
+## Configurações de ambiente
 
 O arquivo .env é responsável por manter os dados de conexão com a plataforma e configurações pertinentes a aplicação.
 
