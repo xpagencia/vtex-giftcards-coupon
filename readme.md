@@ -6,6 +6,11 @@ A partir de uma promoção já existente, esse cupom é associado e fica dispon�
 
 Para que o cupom seja criado numa promoção especifica, o produto do cartão presente precisa ter a especificação "promotionId" preenchida com o ID da promoção que o cupom será associado.
 
+## Funcionalidades
+
+* Criar cupons a partir de uma venda de um produto Cartão Presente.
+* Remover cupons não utilizados em até x dias de vendas feitas pelos produtos de Cartão Presente.
+
 ## Pré configurações
 
 1. Criar na VTEX as promoções que ficarão disponíveis para utilização dos cupons a serem criados pelo app.
@@ -19,6 +24,19 @@ Para que o cupom seja criado numa promoção especifica, o produto do cartão pr
     * promotionId (text): ID da promoção que irá receber o cupom para dar o desconto na próxima compra.
 
 4. Configurar o arquivo .env na raiz desse app.
+
+5. Criar no Master Data da VTEX a entidade PD para receber os pedidos que fazem parte da execução do APP.
+    * Entidade: PD
+        * cartaoPresente: Boolean
+        * email: varchar(750)
+        * firstName: varchar(50)
+        * lastName: varchar(750)
+        * giftcards: varchar(50)
+        * couponValue: Currency
+        * orderId: varchar(50)
+        * orderStatus: varchar(50)
+        * subtotal: Currency
+        * total: Currency
 
 ## Configurações de ambiente
 
@@ -103,3 +121,9 @@ Executa, independente do status do pedido o registro do cupom na promoção resp
 7. **O APP roda em qual versão da VTEX?**
 
     O APP é independente de versão VTEX Legacy ou VTEX.IO porque ele roda em back-end.
+
+8. **Como o cliente saberá o código do cupom que ele ganhou na Compra do Cartão presente?**
+
+    A minha recomendação é que crie uma trigger no Master Data para ser disparada quando o app criar o registro na entidade PD.
+
+    Para isso, disponilibizamos na entidade os campos necessários para o envio do e-mail como: email, firstname, giftcards e couponValue. Mas, com criatividade, todos os campos podem ser aproveitados no e-mail para o cliente.
