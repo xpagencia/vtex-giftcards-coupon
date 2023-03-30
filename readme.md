@@ -93,5 +93,13 @@ Executa, independente do status do pedido o registro do cupom na promoção resp
     O melhor é verificar com a sua contabilidade. Mas, o que eu posso dizer é: *Bem vindo ao Brasil*.
 
 5. **Como eu crio uma especificação de produto?**
-    
+
     Veja no help <https://help.vtex.com/pt/tutorial/cadastrar-especificacoes-ou-campos-de-produto--tutorials_106>
+
+6. **Qual a linguagem do APP?**
+
+    O APP foi desenvolvido em NODE. Pode rodar em qualquer plataforma, porém foi testada apenas no Windows 10.
+
+7. **O APP roda em qual versão da VTEX?**
+
+    O APP é independente de versão VTEX Legacy ou VTEX.IO porque ele roda em back-end.

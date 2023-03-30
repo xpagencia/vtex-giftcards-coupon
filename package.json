@@ -1,5 +1,5 @@
 {
-  "name": "grow",
+  "name": "vtex-giftcard-coupon",
   "version": "1.0.0",
   "description": "Gera cartão presente para compras faturadas na VTEX de produtos de cartão presente.",
   "main": "index.js",
@@ -14,11 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xpagencia/grow-cartao-presente.git"
+    "url": "git+https://github.com/xpagencia/vtex-giftcards-coupon.git"
   },
   "keywords": [
     "vtex",
-    "cartao-presente"
+    "cartao-presente",
+    "giftcard"
   ],
   "devDependencies": {
     "@types/node": "^15.6.0"
