@@ -1,0 +1,33 @@
+{
+  "name": "grow",
+  "version": "1.0.0",
+  "description": "Gera cartão presente para compras faturadas na VTEX de produtos de cartão presente.",
+  "main": "index.js",
+  "author": "Fabio Santos <fabiosantosrj@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "start:order": "node app.js 0 orders",
+    "start:remove": "node app.js 0 remove",
+    "test-orderId": "node ./tests/orderid.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpagencia/grow-cartao-presente.git"
+  },
+  "keywords": [
+    "vtex",
+    "cartao-presente"
+  ],
+  "devDependencies": {
+    "@types/node": "^15.6.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "moment-timezone": "^0.5.34",
+    "qs": "^6.11.0"
+  }
+}
