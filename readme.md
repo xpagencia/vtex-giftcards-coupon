@@ -1,6 +1,6 @@
 # VTEX - Cartão Presente
 
-Cria um cupom único na VTEX quando o pedido é faturado.
+Com esse app, o usuário poderá comprar um produto de "cartão presente" na loja e receber no seu e-mail um cupom com um código aleatório no valor referente a promoção que o cartão presente comprado será associado.
 
 A partir de uma promoção já existente, esse cupom é associado e fica disponível para uso.
 
@@ -8,13 +8,35 @@ Para que o cupom seja criado numa promoção especifica, o produto do cartão pr
 
 ## Pré configurações
 
-1. No cadastro do produto é necessário criar 2 especificações:
+1. Criar na VTEX as promoções que ficarão disponíveis para utilização dos cupons a serem criados pelo app.
+
+2. Criar na VTEX os produtos que serão as opções de "Cartão Presente".
+
+3. No cadastro do produto é necessário criar 2 especificações:
 
     * GiftCard (checkbox): Precisa ter o valor "Sim" de forma opcional. Se marcado, participará do app para gerar o cupom.
 
     * promotionId (text): ID da promoção que irá receber o cupom para dar o desconto na próxima compra.
 
-2. Configurar o arquivo .env na raiz desse app.
+4. Configurar o arquivo .env na raiz desse app.
+
+## Configurações de ambiente
+
+O arquivo .env é responsável por manter os dados de conexão com a plataforma e configurações pertinentes a aplicação.
+
+**Parâmetros:**
+
+* VTX_ACCOUNTNAME: Accoutname da loja onde a API irá rodar. Ex: meuAccountName
+
+* VTX_API: Url que será acessada para consultar as informações da VTEX. Ex: <https://meuAccountName.vtexcommercestable.com.br/api>
+
+* VTX_APPKEY: AppKey criada na loja VTEX exclusiva para a aplicação.
+
+* VTX_APPTOKEN: Token da appKey criada na VTEX.
+
+* CUPOM_PRAZO_DIAS: Número de dias padrão para arquivar um cupom.
+
+* TEMPO_EXECUCAO_MINUTOS: Tempo em minutos de descanso de um job.
 
 ## Opções de job
 
@@ -48,20 +70,28 @@ Executa, independente do status do pedido o registro do cupom na promoção resp
 
 * orderId = Código do pedido na VTEX. Campo obrigatório.
 
-## Configurações de ambiente
+## FAQ - Perguntas frequentes
 
-O arquivo .env é responsável por manter os dados de conexão com a plataforma e configurações pertinentes a aplicação.
+1. **Como eu crio promoções na VTEX?**
 
-**Parâmetros:**
+    Veja no help <https://help.vtex.com/pt/tracks/promotions--6asfF1vFYiZgTQtOzwJchR/7FjbeZdE2KMwk5L1t98pZI>
 
-* VTX_ACCOUNTNAME: Accoutname da loja onde a API irá rodar. Ex: meuAccountName
+    A promoção que vai receber os cupons, ela terá uma utm_source a seu critério. O resto da configuração você decide como fará.
 
-* VTX_API: Url que será acessada para consultar as informações da VTEX. Ex: <https://meuAccountName.vtexcommercestable.com.br/api>
+2. **O usuário pagará frete para comprar o Cartão Presente?**
 
-* VTX_APPKEY: AppKey criada na loja VTEX exclusiva para a aplicação.
+    O mais óbvio é que não pague, visto que você não usará nenhuma transportadora para entregar o cartão presente para ele. Mas, o critério é seu. 
 
-* VTX_APPTOKEN: Token da appKey criada na VTEX.
+    Se não quiser cobrar frete, basta criar uma promoção de frete grátis e associar todos os produtos que serão "Cartão Presente".
 
-* CUPOM_PRAZO_DIAS: Número de dias padrão para arquivar um cupom.
+3. **Eu preciso gerar nota fiscal na venda de um Cartão Presente?**
 
-* TEMPO_EXECUCAO_MINUTOS: Tempo em minutos de descanso de um job.
+    Todo pedido na VTEX para ser concluído precisa ter NF e faturado. Sendo assim, o melhor é verificar com a sua contabilidade como deverá ser passada a NF para esse tipo de venda que não terá entrega.
+
+4. **Se eu gero NF para a venda do Cartão Presente e também para a venda com o cupom, eu estou pagando 2 impostos?**
+
+    O melhor é verificar com a sua contabilidade. Mas, o que eu posso dizer é: *Bem vindo ao Brasil*.
+
+5. **Como eu crio uma especificação de produto?**
+    
+    Veja no help <https://help.vtex.com/pt/tutorial/cadastrar-especificacoes-ou-campos-de-produto--tutorials_106>
