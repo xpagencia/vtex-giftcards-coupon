@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { resolve } from 'path';
+import { resolve, extname } from 'path';
 
 export const saveLogErrors = (file, fileText) => {
     fileText = "\r\n" + fileText;
@@ -64,4 +64,8 @@ export const pathResolve = (dir, filename) => {
 
 export const renameFile = (oldPath, newPath, callback) => {
     fs.rename(oldPath, newPath, callback);
+}
+
+export const extNameFile = (path) => {
+    return extname(path);
 }
