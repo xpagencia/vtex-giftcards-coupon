@@ -1,5 +1,5 @@
 import { getOrder } from '../modules/vtex/orders/orders.js'
-import { readdir, stat, pathResolve, renameFile } from '../lib/files.js';
+import { readdir, stat, pathResolve, renameFile, extNameFile } from '../lib/files.js';
 import { openJson, removeJson } from '../lib/json.js';
 import { getPromotionById } from '../modules/vtex/rates and benefits/calculatorConfiguration.js';
 import { create as createCuponVTEX } from '../modules/vtex/rates and benefits/coupon.js';
@@ -9,7 +9,6 @@ import { getProductSpecifications } from '../modules/vtex/catalog/products.js'
 
 const executingOrder = async (order) => {
     //verifico se é pedido com giftcard e se nunca foi lido.
-    //console.log(order);
     if (order && order.items.find(x => x.giftCard != undefined && x.giftCard.active == true) != undefined) {
         //verifico se não está no MD
         let result = await MDSearch('PD', "orderId", `orderId=${order.orderId}`);
@@ -35,13 +34,13 @@ const createOrders = async () => {
                     if (error) throw error;
                     let operation = false;
 
-                    // check if the current path is a file or a folder
-                    if (_stat.isFile()) {
+                    // check if the current path is a file json
+                    if (_stat.isFile() && extNameFile(filename) == ".json") {
                         const fileJson = openJson(dirHandles, filename);
                         if (fileJson) {
                             let orderId = filename.replace(".json", "");
                             let order = await mountOrder(orderId);
-                            if (executingOrder(order)) {
+                            if (await executingOrder(order)) {
                                 if (createOrder(order)) {
                                     renameFile(`${dirHandles}\\${filename}`, `${dirOrders}\\${filename}`, () => { });
                                     operation = true;
@@ -109,7 +108,7 @@ const getPromotion = async (promotionId) => {
 
 const createOrder = async (order) => {
     //para gravar o cupom na vtex e no masterdata, verifica se o pedido possui um produto de giftcard. Se sim, então continua a operação.
-    if (!executingOrder(order)) {
+    if (!await executingOrder(order)) {
         console.log(`createOrder: order not appoved = ${order.orderId}`);
         return false;
     }
@@ -172,7 +171,7 @@ const createOrderMD = async (order) => {
 export const create = async (orderId = null) => {
     if (orderId != null) {
         let order = await mountOrder(orderId);
-        if (executingOrder(order)) {
+        if (await executingOrder(order)) {
             await createOrder(order);
         } else {
             console.warn(`OrderId ${orderId} não aprovado.`);
