@@ -103,6 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-# sirius
+# app
 /sem-git
 /errors
+/data
