@@ -11,5 +11,11 @@ const saveHandle = (element) => {
 }
 
 export const importFeed = async (status) => {
-    return await importFeedVTEX(status, saveHandle);
+    const data = {
+        "filter": {
+            "status": status,
+            "type": "FromWorkflow"
+        },
+    }
+    return await importFeedVTEX(data, saveHandle);
 }
